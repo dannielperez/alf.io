@@ -34,8 +34,8 @@ services:
     image: certbot/certbot
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-    command: renew --quiet --no-self-upgrade
-    restart: unless-stopped
+    command: renew --quiet
+    restart: on-failure
   nginx:
     image: nginx:latest
     command: ["nginx", "-g", "daemon off;"]

@@ -10,7 +10,7 @@ services:
       POSTGRES_ENV_POSTGRES_PASSWORD: alfio
       SPRING_PROFILES_ACTIVE: jdbc-session,stdout
     ports:
-      - "8080:8080" #dev
+      # - "8080:8080" #dev
       - "8443:8443"
   db:
     image: postgres:10

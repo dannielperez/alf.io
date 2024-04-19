@@ -32,6 +32,14 @@ services:
     command: certonly --webroot --webroot-path=/var/www/certbot --email entramevip@gmail.com --agree-tos --no-eff-email --force-renewal -d entrame.vip
     depends_on:
       - nginx
+  certbot-renew:
+    image: certbot/certbot
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+    command: renew --quiet --no-self-upgrade
+    restart: unless-stopped
+    depends_on:
+      - certbot
   nginx:
     image: nginx:latest
     ports:

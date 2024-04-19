@@ -25,20 +25,20 @@ services:
         mode: host
     volumes:
       - data-volume:/var/lib/postgresql/data
-  # certbot:
-  #   image: certbot/certbot
-  #   volumes:
-  #     - ./letsencrypt:/etc/letsencrypt
-  #   command: certonly --webroot --webroot-path=/etc/letsencrypt --email entramevip@gmail.com --agree-tos --no-eff-email --force-renewal -d entrame.vip
-  # certbot-renew:
-  #   image: certbot/certbot
-  #   volumes:
-  #     - ./letsencrypt:/etc/letsencrypt
-  #   command: renew --quiet
-  #   restart: on-failure
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+    command: certonly --webroot --webroot-path=/etc/letsencrypt --email entramevip@gmail.com --agree-tos --no-eff-email --force-renewal -d entrame.vip
+  certbot-renew:
+    image: certbot/certbot
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+    command: renew --quiet
+    restart: on-failure
   nginx:
     image: nginx:latest
-    command: ["/bin/sh", "-c", "nginx && while ! [ -f /etc/letsencrypt/live/entrame.vip/fullchain.pem ]; do sleep 1; done && sed -i 's/#listen 443 ssl/listen 443 ssl/g' /etc/nginx/nginx.conf && nginx -s reload"]
+    command: ["/bin/sh", "-c", "while ! [ -f /etc/letsencrypt/live/entrame.vip/fullchain.pem ]; do sleep 1; done && sed -i 's/#listen 443 ssl/listen 443 ssl/g' /etc/nginx/nginx.conf && nginx"]
     ports:
       - "80:80"
       - "443:443"

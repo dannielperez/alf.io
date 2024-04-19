@@ -28,7 +28,7 @@ services:
   nginx:
     build: 
       context: .
-      dockerfile: Dockerfile-nginx
+      dockerfile: Dockerfile-nginx.dockerfile
     command: ["/bin/sh", "-c", "while ! [ -f /etc/letsencrypt/live/entrame.vip/fullchain.pem ]; do sleep 1; done && nginx"]
     ports:
       - "80:80"

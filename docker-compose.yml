@@ -29,7 +29,7 @@ services:
     image: certbot/certbot
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-    command: certonly --webroot --webroot-path=/var/www/certbot --email entramevip@gmail.com --agree-tos --no-eff-email --force-renewal -d entrame.vip
+    command: certonly --webroot --webroot-path=/etc/letsencrypt/webrootauth --email entramevip@gmail.com --agree-tos --no-eff-email --force-renewal -d entrame.vip
   certbot-renew:
     image: certbot/certbot
     volumes:
